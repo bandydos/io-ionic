@@ -1,22 +1,19 @@
-import { IonButtons, IonButton, IonIcon, IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonText, IonNav, IonRouterLink } from '@ionic/react';
+import { IonHeader, IonPage, IonTitle, IonToolbar, IonText, IonNav, IonRouterLink, IonFooter, IonContent, IonButtons, IonButton } from '@ionic/react';
 import React from 'react';
 import Welcome from '../components/Welcome';
 import './Home.css';
-import { personCircle, search, helpCircle, star, create, ellipsisHorizontal, ellipsisVertical } from 'ionicons/icons';
 const Home: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar color="primary">
-          <IonRouterLink href="/home" slot="start" color="light">
-            <IonText>Home</IonText>
-          </IonRouterLink>
-          <IonRouterLink href="/iospecs" slot="end" color="light">
-            <IonText>IO Specs</IonText>
-          </IonRouterLink>
+          <IonTitle class="ion-text-center">Home</IonTitle>
+          <IonButtons slot="end">
+            <IonButton href="/iospecs" color="light">IO Specs</IonButton>
+          </IonButtons>
         </IonToolbar>
       </IonHeader>
-      <IonContent fullscreen>
+      <IonContent>
         <Welcome />
       </IonContent>
     </IonPage>
