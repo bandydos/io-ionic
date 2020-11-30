@@ -16,9 +16,12 @@ const initialIoBlocks: Array<IOBlock> = [
 const Dashboard: React.FC<DashboardProps> = () => {
   const [ioBlocks, setIoBlocks] = useState<IOBlock[]>(initialIoBlocks);
 
+  const [command, setCommand] = useState<object>({});
+
   const addBlock: AddBlock = (newPin, newStatus) => {
     const newCommand = JSON.stringify({pin: newPin, status: newStatus});
     setIoBlocks([...ioBlocks, { pin: parseInt(newPin), status: newStatus, command: newCommand}]) // Add new block.
+    setCommand({pin: newPin, status:newStatus});
   }
 
   // Client info.
@@ -49,13 +52,11 @@ const Dashboard: React.FC<DashboardProps> = () => {
   // Called when the client connects.
   function onConnect() {
     // Once a connection has been made, make a subscription and send a message.
-    /*
     console.log("onConnect");
     client.subscribe("/io/ion");
-    let message = new Paho.Message(JSON.stringify(newCommand));
+    let message = new Paho.Message(JSON.stringify(command));
     message.destinationName = "/io/ion";
     client.send(message);
-    */
   }
 
   // On fail.
