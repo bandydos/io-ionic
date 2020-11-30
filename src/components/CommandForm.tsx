@@ -15,7 +15,7 @@ export const CommandForm: React.FC<CommandFormProps> = ({ addBlock, name, label 
         setNewCommand(e.detail.value!)
     }
 
-    const handleClick = (e: FormEvent<HTMLIonButtonElement>) => {
+    const handleClick = (e: FormEvent<HTMLButtonElement>) => {
         e.preventDefault();
         addBlock(newCommand);
     }
@@ -25,7 +25,7 @@ export const CommandForm: React.FC<CommandFormProps> = ({ addBlock, name, label 
             <label htmlFor={name}>{label}</label>
             <IonInput value={newCommand} type="text" placeholder="Select pin" onIonChange={handleIonChange} id={name} />
             <IonToggle onIonChange={(x) => console.log(x)}></IonToggle>
-            <IonButton type="submit" onClick={handleClick}>send</IonButton>
+            <button type="submit" onClick={handleClick}>add</button>
         </form>
     );
 };

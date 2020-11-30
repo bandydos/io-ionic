@@ -33,7 +33,7 @@ const Dashboard: React.FC<DashboardProps> = () => {
 
   return (
     <React.Fragment>
-      <InOutBlockList blocks={initialIoBlocks} />
+      <InOutBlockList blocks={ioBlocks} />
       <CommandForm addBlock={addBlock} name="addpin" label="Add pin"></CommandForm>
     </React.Fragment>
   );
