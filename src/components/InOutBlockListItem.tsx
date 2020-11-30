@@ -15,6 +15,7 @@ const InOutBlockListItem: React.FC<InOutBlockListItemProps> = ({ block }) => {
                 disabled={true}
                 name={"p" + block.pin}
             ></IonToggle>
+            
         </IonItem>
     );
 };

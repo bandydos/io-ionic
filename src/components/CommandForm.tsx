@@ -5,9 +5,10 @@ interface CommandFormProps {
     addBlock: AddBlock;
     name: string;
     label: string;
+    command: object;
 }
 
-export const CommandForm: React.FC<CommandFormProps> = ({ addBlock, name, label }) => {
+export const CommandForm: React.FC<CommandFormProps> = ({ addBlock, name, label, command }) => {
     const [newPin, setNewPin] = useState<string>("");
     const [newStatus, setNewStatus] = useState<boolean>(false);
 
