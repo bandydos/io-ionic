@@ -1,7 +1,6 @@
 import { IonPage, IonBackButton, IonHeader, IonToolbar, IonButtons, IonMenuButton, IonContent, IonTitle, IonText } from '@ionic/react';
 import React from 'react';
 import Dashboard from '../components/Dashboard';
-import SendCommand from '../components/SendCommand';
 
 const IoSpecs: React.FC = () => {
     return (
@@ -15,7 +14,7 @@ const IoSpecs: React.FC = () => {
                 </IonToolbar>
             </IonHeader>
             <IonContent>
-                <SendCommand />
+                <Dashboard />
             </IonContent>
         </IonPage>
     );
