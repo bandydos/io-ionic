@@ -3,4 +3,4 @@ type IOBlock = {
     status: boolean;
 }
 
-type AddBlock = (newPin: string) => void;
+type AddBlock = (newPin: string, newStatus: boolean) => void;

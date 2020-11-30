@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { setOriginalNode } from 'typescript';
 import { CommandForm } from './CommandForm';
 import './Dashboard.css';
 import InOutBlockList from './InOutBlockList';
@@ -14,21 +13,8 @@ const initialIoBlocks: Array<IOBlock> = [
 const Dashboard: React.FC<DashboardProps> = () => {
   const [ioBlocks, setIoBlocks] = useState(initialIoBlocks);
 
-  const toggleBlock = (selectedBlock : IOBlock) => {
-    const newBlocks = ioBlocks.map(block => {
-      if (block === selectedBlock) {
-        return {
-          ...block,
-          status: !block.status
-        }
-      }
-      return block;
-    });
-    setIoBlocks(newBlocks);
-  }
-
-  const addBlock: AddBlock = (newBlock) => {
-    setIoBlocks([...ioBlocks, {pin: parseInt(newBlock), status: true}])
+  const addBlock: AddBlock = (newPin, newStatus) => {
+    setIoBlocks([...ioBlocks, {pin: parseInt(newPin), status: newStatus}])
   }
 
   return (
