@@ -1,4 +1,4 @@
-import { IonPage, IonBackButton, IonHeader, IonToolbar, IonButtons, IonMenuButton, IonContent, IonTitle, IonText } from '@ionic/react';
+import { IonPage, IonBackButton, IonHeader, IonToolbar, IonButtons, IonContent, IonTitle } from '@ionic/react';
 import React from 'react';
 import Dashboard from '../components/Dashboard';
 
@@ -10,7 +10,7 @@ const IoSpecs: React.FC = () => {
                     <IonButtons slot="start">
                         <IonBackButton text="" defaultHref="home" />
                     </IonButtons>
-                    <IonTitle class="ion-text-center">IO Specs</IonTitle>
+                    <IonTitle class="ion-text-center">Send command</IonTitle>
                 </IonToolbar>
             </IonHeader>
             <IonContent>

@@ -1,13 +1,14 @@
-import { IonInput, IonToggle } from "@ionic/react";
-import React, { FormEvent, useState } from "react";
+import { IonButton, IonInput, IonToggle } from "@ionic/react";
+import React, { useState } from "react";
 
 interface CommandFormProps {
     addBlock: AddBlock;
     name: string;
     label: string;
+    command: object;
 }
 
-export const CommandForm: React.FC<CommandFormProps> = ({ addBlock, name, label}) => {
+export const CommandForm: React.FC<CommandFormProps> = ({ addBlock, name, label }) => {
     const [newPin, setNewPin] = useState<string>("");
     const [newStatus, setNewStatus] = useState<boolean>(false);
 
@@ -19,17 +20,21 @@ export const CommandForm: React.FC<CommandFormProps> = ({ addBlock, name, label}
         setNewStatus(e.detail.checked);
     }
 
-    const handleClick = (e: FormEvent<HTMLButtonElement>) => {
-        e.preventDefault(); // Prevent reloading.
-        addBlock(newPin, newStatus); // Add block to list.
-    }
-
     return (
         <form>
+            <br />
             <label htmlFor={name}>{label}</label>
-            <IonInput value={newPin} type="text" placeholder="Select pin" onIonChange={handleIonChange} id={name} />
-            <IonToggle onIonChange={handleOnIonToggleChange}></IonToggle>
-            <button type="submit" onClick={handleClick}>add</button>
+            <div>
+                <IonInput value={newPin} type="text" placeholder="Select pin" onIonChange={handleIonChange} id={name} />
+                <label htmlFor={"toggle"}>Status</label>
+                <br />
+                <IonToggle id="toggle" onIonChange={handleOnIonToggleChange}></IonToggle>
+            </div>
+            <br />
+            <IonButton onClick={(e) => {
+                e.preventDefault();
+                addBlock(newPin, newStatus);
+            }}>ADD</IonButton>
         </form>
     );
 };

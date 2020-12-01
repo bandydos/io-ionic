@@ -1,20 +1,20 @@
-import { IonHeader, IonPage, IonTitle, IonToolbar, IonText, IonNav, IonRouterLink, IonFooter, IonContent, IonButtons, IonButton } from '@ionic/react';
+import { IonHeader, IonPage, IonTitle, IonToolbar, IonContent, IonButtons, IonButton } from '@ionic/react';
 import React from 'react';
-import Welcome from '../components/Welcome';
+import ShowPins from '../components/ShowPins';
 import './Home.css';
 const Home: React.FC = () => {
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar color="primary">
-          <IonTitle class="ion-text-center">Home</IonTitle>
+          <IonTitle class="ion-text-center">IO monitor</IonTitle>
           <IonButtons slot="end">
-            <IonButton href="/iospecs" color="light">IO Specs</IonButton>
+            <IonButton href="/iospecs" color="light">Send command</IonButton>
           </IonButtons>
         </IonToolbar>
       </IonHeader>
       <IonContent>
-        <Welcome />
+        <ShowPins />
       </IonContent>
     </IonPage>
   );

@@ -3,36 +3,28 @@ import { CommandForm } from './CommandForm';
 import './Dashboard.css';
 import InOutBlockList from './InOutBlockList';
 import Paho, { ErrorWithInvocationContext } from 'paho-mqtt';
-
+import host from '../clientcreds/mqtt-host';
 interface DashboardProps {
 
 }
 
 const initialIoBlocks: Array<IOBlock> = [
-  { pin: 12, status: false, command: JSON.stringify({pin: 12, status: false}) },
-  { pin: 14, status: false, command: JSON.stringify({pin: 14, status: false}) }
+  { pin: 12, status: false, command: JSON.stringify({ pin: 12, status: false }) },
+  { pin: 14, status: false, command: JSON.stringify({ pin: 14, status: false }) }
 ];
 
 const Dashboard: React.FC<DashboardProps> = () => {
   const [ioBlocks, setIoBlocks] = useState<IOBlock[]>(initialIoBlocks);
-
   const [command, setCommand] = useState<object>({});
 
   const addBlock: AddBlock = (newPin, newStatus) => {
-    const newCommand = JSON.stringify({pin: newPin, status: newStatus});
-    setIoBlocks([...ioBlocks, { pin: parseInt(newPin), status: newStatus, command: newCommand}]) // Add new block.
-    setCommand({pin: newPin, status:newStatus});
+    const newCommand = JSON.stringify({ pin: newPin, status: newStatus });
+    setIoBlocks([...ioBlocks, { pin: parseInt(newPin), status: newStatus, command: newCommand }]) // Add new block.
+    setCommand({ pin: newPin, status: newStatus });
   }
 
-  // Client info.
-  const mqttHost = "farmer.cloudmqtt.com";
-  const mqttPort = 34511;
-  const user = "itiwppsz";
-  const password = "BkRYsnNyy_tk";
-  const clientId = Math.floor(Math.random() * 10001);
-
   // Create new Paho client.
-  const client = new Paho.Client(mqttHost, Number(mqttPort), String(clientId));
+  const client = new Paho.Client(host.mqttHost, Number(host.mqttPort), String(host.clientId));
 
   // Set callback handlers.
   client.onConnectionLost = onConnectionLost;
@@ -41,8 +33,8 @@ const Dashboard: React.FC<DashboardProps> = () => {
   const connectOptions = {
     onSuccess: onConnect,
     onFailure: doFailure,
-    userName: user,
-    password: password,
+    userName: host.user,
+    password: host.password,
     useSSL: true
   }
 
@@ -51,11 +43,9 @@ const Dashboard: React.FC<DashboardProps> = () => {
 
   // Called when the client connects.
   function onConnect() {
-    // Once a connection has been made, make a subscription and send a message.
     console.log("onConnect");
-    client.subscribe("/io/ion");
     let message = new Paho.Message(JSON.stringify(command));
-    message.destinationName = "/io/ion";
+    message.destinationName = "io/out";
     client.send(message);
   }
 
@@ -76,10 +66,13 @@ const Dashboard: React.FC<DashboardProps> = () => {
     console.log("onMessageArrived:" + message.payloadString);
   }
 
+
   return (
     <React.Fragment>
       <InOutBlockList blocks={ioBlocks} />
-      <CommandForm addBlock={addBlock} name="addpin" label="Add pin" />
+      <div className="margin-left"  >
+        <CommandForm command={command} addBlock={addBlock} name="addpin" label="Add pin" />
+      </div>
     </React.Fragment>
   );
 };
